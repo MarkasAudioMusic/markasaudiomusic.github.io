@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Musik - Markas Audio Music</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Menggunakan font Poppins yang modern dan mudah dibaca */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #1a1a1a;
+            color: #e5e5e5;
+            overflow-x: hidden;
+        }
+
+        /* Latar belakang animasi gradien yang dinamis dengan warna yang lebih harmonis */
+        .animated-gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00C6FF, #F97316, #977AF9);
+            background-size: 400% 400%;
+            animation: gradient-flow 25s ease infinite;
+            z-index: -20;
+        }
+
+        /* Animasi pergerakan gradien */
+        @keyframes gradient-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Efek frosted glass untuk kontainer utama */
+        .frosted-glass {
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.2);
+            color: white; /* Mengatur warna teks menjadi putih untuk kontras */
+        }
+
+        .music-card {
+            display: flex;
+            flex-direction: column;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .music-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+    <!-- Latar belakang animasi gradien -->
+    <div class="animated-gradient-bg"></div>
+
+    <!-- Kontainer utama blog -->
+    <div class="container mx-auto p-4 md:p-8 relative z-10">
+        <!-- Header Blog -->
+        <header class="text-center my-10">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight tracking-wide drop-shadow-lg text-white">
+                Koleksi Musik Bebas Hak Cipta
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mt-4">
+                Temukan musik yang pas untuk video dan konten Anda.
+            </p>
+            <a href="index.html" class="inline-block mt-6 text-blue-300 hover:text-blue-200 transition-colors duration-300">
+                ← Kembali ke Halaman Utama
+            </a>
+        </header>
+
+        <!-- Daftar musik akan dirender di sini oleh JavaScript -->
+        <main id="musicList" class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="pt-10 pb-6 text-gray-200 text-sm text-center bg-gray-900 bg-opacity-50">
+        <p>&copy; 2024 Markas Audio Music.</p>
+        <div class="mt-4 flex justify-center space-x-6">
+            <!-- Tautan ke channel YouTube Anda dengan ikon SVG -->
+            <a href="https://studio.youtube.com/channel/UCbLzJiH7JchPC8RKSRPXHEA" target="_blank" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-white/10 transition-colors duration-300 group">
+                <svg class="h-6 w-6 text-red-500 group-hover:text-red-400 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.615 3.184c-3.66-1.579-7.323-1.58-10.983 0A2.88 2.88 0 0 0 5 6.375c-1.579 3.66-.525 9.042 0 10.983A2.88 2.88 0 0 0 6.375 19c3.66 1.579 7.323 1.58 10.983 0A2.88 2.88 0 0 0 19 17.625c1.579-3.66.525-9.042 0-10.983A2.88 2.88 0 0 0 19.615 3.184Z" fill="#ff0000"/><path d="M10 15.654v-7.308L16 12l-6 3.654Z" fill="#ffffff"/>
+                </svg>
+                <span class="text-white text-lg font-semibold group-hover:text-red-400 transition-colors duration-300">YouTube</span>
+            </a>
+            <!-- Tautan media sosial lain dengan ikon SVG -->
+            <a href="URL_INSTAGRAM_ANDA" target="_blank" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-white/10 transition-colors duration-300 group">
+                <svg class="h-6 w-6 text-pink-500 group-hover:text-pink-400 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C8.214 2 7.747 2.016 6.276 2.083 4.805 2.15 3.79 2.505 2.76 3.535S2.15 4.805 2.083 6.276c-.067 1.47-.083 1.944-.083 5.724s.016 4.254.083 5.724c.067 1.47.422 2.485 1.452 3.515 1.03 1.03 2.045 1.385 3.515 1.452 1.47.067 1.944.083 5.724.083s4.254-.016 5.724-.083c1.47-.067 2.485-.422 3.515-1.452s1.385-2.045 1.452-3.515c.067-1.47.083-1.944.083-5.724s-.016-4.254-.083-5.724c-.067-1.47-.422-2.485-1.452-3.515S18.195 2.15 16.724 2.083C15.253 2.016 14.786 2 11 2zm-1 18h2c2.096 0 2.378-.016 3.232-.054.836-.037 1.36-.263 1.81-.462.593-.263.993-.654 1.256-.918.263-.263.654-.663.918-1.256.199-.45.425-.974.462-1.81.038-.854.054-1.136.054-3.232s-.016-2.378-.054-3.232c-.037-.836-.263-1.36-.462-1.81-.263-.593-.654-.993-.918-1.256s-.663-.654-1.256-.918c-.45-.199-.974-.425-1.81-.462-.854-.038-1.136-.054-3.232-.054s-2.378.016-3.232.054c.836.037-1.36.263-1.81.462-.593.263-.993.654-1.256.918-.263.263-.654.663-.918 1.256-.199.45-.425.974-.462 1.81-.038.854-.054 1.136-.054 3.232s.016 2.378.054 3.232c.037.836.263 1.36.462 1.81.263.593.654.993.918 1.256.263.263.663.654 1.256.918.45.199.974.425 1.81.462.854.038 1.136.054 3.232.054zm-.001-1.498h.002s.013 0 .026-.001c.854-.038 1.09-.053 3.094-.053s2.24.015 3.094.053c.69.03 1.13.208 1.543.376.43.176.726.37 1.025.669.299.299.493.595.669 1.025.168.413.346.853.376 1.543.038.854.053 1.09.053 3.094s-.015 2.24-.053 3.094c-.03.69-.208 1.13-.376 1.543-.176.43-.37.726-.669 1.025-.299.299-.595.493-1.025.669-.413.168-.853-.346-1.543-.376-.854-.038-1.09-.053-3.094-.053s-2.24-.015-3.094-.053c-.69-.03-1.13-.208-1.543-.376-.43-.176-.726-.37-1.025-.669-.299-.299-.493-.595-.669-1.025-.168-.413-.346-.853-.376-1.543-.038-.854-.053-1.09-.053-3.094s.015-2.24.053-3.094c.03-.69.208-1.13.376-1.543.176-.43.37-.726.669-1.025.299-.299.595-.493 1.025-.669.413-.168.853-.346 1.543-.376.854-.038 1.09-.053 3.094-.053zM12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zm0-11a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm5-3.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                </svg>
+                <span class="text-white text-lg font-semibold group-hover:text-pink-400 transition-colors duration-300">Instagram</span>
+            </a>
+            <a href="URL_TIKTOK_ANDA" target="_blank" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-white/10 transition-colors duration-300 group">
+                <svg class="h-6 w-6 text-white group-hover:text-gray-200 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 14v-4c0-1.104-.896-2-2-2H8v2h3v4h-3v2h6v-2h-3zm-1-6h2c1.104 0 2-.896 2-2V8h-2v2h-2c-1.104 0-2 .896-2 2zM17 8h-2v2h-2v-2h-2V8h6V6h2v6h-2V8z"/>
+                </svg>
+                <span class="text-white text-lg font-semibold group-hover:text-gray-200 transition-colors duration-300">TikTok</span>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript untuk menampilkan musik dan fungsionalitas pemutar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Data musik statis untuk contoh.
+            // Dalam aplikasi sungguhan, data ini akan diambil dari server atau database.
+            const musicData = [
+                {
+                    id: '1',
+                    title: 'Gaming Beat',
+                    artist: 'Markas Audio',
+                    genre: 'Gaming EDM',
+                    file: 'https://cdn.pixabay.com/download/audio/2023/06/15/audio_24751f8a84.mp3?filename=lofi-study-112191.mp3'
+                },
+                {
+                    id: '2',
+                    title: 'The Hero\'s Journey',
+                    artist: 'Markas Audio',
+                    genre: 'Cinematic',
+                    file: 'https://cdn.pixabay.com/download/audio/2023/12/28/audio_255fa3e8fe.mp3?filename=cinematic-ambient-dream-175655.mp3'
+                },
+                {
+                    id: '3',
+                    title: 'Chillhop Vibes',
+                    artist: 'Markas Audio',
+                    genre: 'Lofi Hip Hop',
+                    file: 'https://cdn.pixabay.com/download/audio/2023/12/28/audio_820c788647.mp3?filename=smooth-relaxing-hip-hop-175510.mp3'
+                },
+                {
+                    id: '4',
+                    title: 'Rockin\' the Game',
+                    artist: 'Markas Audio',
+                    genre: 'Rock',
+                    file: 'https://cdn.pixabay.com/download/audio/2024/02/16/audio_03d97f1f0a.mp3?filename=upbeat-funk-rock-181146.mp3'
+                },
+            ];
+
+            const musicList = document.getElementById('musicList');
+            let currentAudio = null;
+            let currentButton = null;
+
+            // Fungsi untuk membuat elemen HTML untuk setiap lagu
+            function createMusicCard(music) {
+                const card = document.createElement('div');
+                card.classList.add('music-card');
+
+                const title = document.createElement('h3');
+                title.classList.add('text-xl', 'font-bold', 'text-white');
+                title.textContent = music.title;
+
+                const artist = document.createElement('p');
+                artist.classList.add('text-gray-400', 'text-sm', 'mt-1');
+                artist.textContent = `oleh ${music.artist}`;
+
+                const genre = document.createElement('span');
+                genre.classList.add('inline-block', 'bg-blue-600', 'text-white', 'text-xs', 'font-semibold', 'px-3', 'py-1', 'rounded-full', 'mt-2');
+                genre.textContent = music.genre;
+
+                const audioPlayer = document.createElement('audio');
+                audioPlayer.controls = true;
+                audioPlayer.classList.add('mt-4', 'w-full');
+                const source = document.createElement('source');
+                source.src = music.file;
+                source.type = 'audio/mpeg';
+                audioPlayer.appendChild(source);
+
+                const downloadButton = document.createElement('a');
+                downloadButton.classList.add('mt-4', 'inline-block', 'py-2', 'px-6', 'rounded-full', 'bg-orange-500', 'text-white', 'font-semibold', 'transition-colors', 'hover:bg-orange-600');
+                downloadButton.href = music.file;
+                downloadButton.download = `${music.title}.mp3`;
+                downloadButton.textContent = 'Unduh';
+
+                card.appendChild(title);
+                card.appendChild(artist);
+                card.appendChild(genre);
+                card.appendChild(audioPlayer);
+                card.appendChild(downloadButton);
+
+                return card;
+            }
+
+            // Render semua musik ke halaman
+            musicData.forEach(music => {
+                musicList.appendChild(createMusicCard(music));
+            });
+        });
+    </script>
+</body>
+</html>
