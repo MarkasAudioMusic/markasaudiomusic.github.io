@@ -3,204 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koleksi Musik - Markas Audio Music</title>
+    <title>Judul Artikel Anda - Markas Audio Music</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Menggunakan font Poppins yang modern dan mudah dibaca */
+        /* Mengatur font untuk seluruh halaman */
         body {
             font-family: 'Poppins', sans-serif;
+            background: #1a1a1a;
+            color: #e5e5e5;
+            overflow-x: hidden;
         }
-
-        /* Latar belakang gradien cerah dengan nuansa oranye-hijau */
-        .bg-gradient-vibrant {
-            background: linear-gradient(45deg, #F97316, #16A34A, #FDE047);
+        
+        /* Latar belakang animasi gradien yang dinamis dengan warna yang lebih harmonis */
+        .animated-gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #00C6FF, #F97316, #977AF9);
             background-size: 400% 400%;
-            animation: gradient-animation 15s ease infinite;
+            animation: gradient-flow 25s ease infinite;
+            z-index: -20;
         }
-
-        /* Animasi gradien untuk efek yang lebih hidup */
-        @keyframes gradient-animation {
+        
+        /* Animasi pergerakan gradien */
+        @keyframes gradient-flow {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
+        
         /* Efek frosted glass untuk kontainer utama */
         .frosted-glass {
             backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.4);
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Placeholder iklan, memastikan ukurannya fleksibel */
+        .ad-placeholder {
+            background-color: #333;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            border: 1px dashed #666;
+            margin: 2rem 0;
+            border-radius: 1rem;
+        }
+
+        /* Memperbaiki masalah lebar pemutar audio agar responsif */
+        .audio-player-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .audio-player-container audio {
+            width: calc(100% - 7rem); /* Mengatur lebar audio agar tidak tumpang tindih dengan tombol unduh */
+        }
+
+        /* Memperbaiki masalah lebar pada embed video agar responsif */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Rasio aspek 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
-<body class="bg-gradient-vibrant text-gray-900 min-h-screen p-4">
+<body class="text-white min-h-screen">
+    <!-- Latar belakang animasi gradien -->
+    <div class="animated-gradient-bg"></div>
 
-    <!-- Kontainer Utama dengan desain yang seragam -->
-    <div class="frosted-glass rounded-3xl shadow-2xl p-8 md:p-12 max-w-4xl mx-auto my-8 space-y-8 border border-white/50 animate-fade-in">
-
-        <!-- Header Halaman Blog -->
-        <header class="text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight drop-shadow-lg">
-                Koleksi Musik Kami
+    <!-- Kontainer utama artikel, menggunakan "mx-auto" dan "max-w-4xl" agar responsif dan terpusat -->
+    <div class="container mx-auto p-4 md:p-8 relative z-10">
+        <!-- Header Artikel -->
+        <header class="text-center my-10">
+            <a href="blog.html" class="inline-block mb-4 text-blue-300 hover:text-blue-200 transition-colors duration-300">
+                ← Kembali ke Blog
+            </a>
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-lg text-white">
+                Judul Artikel Anda di Sini
             </h1>
-            <p class="text-base md:text-lg text-gray-700 mt-2">
-                Temukan dan gunakan musik bebas hak cipta untuk kontenmu.
+            <p class="text-sm md:text-base text-gray-400 mt-2">
+                Dipublikasikan pada 1 Agustus 2024
             </p>
         </header>
 
-        <!-- Link ke halaman unggah -->
-        <a href="upload.html" class="inline-block px-6 py-3 bg-blue-700 text-white font-semibold rounded-full shadow-lg hover:bg-blue-800 transition-colors duration-300">
-            + Tambah Musik Baru
-        </a>
+        <!-- Konten Artikel -->
+        <main class="frosted-glass rounded-3xl p-6 md:p-12 mb-8">
+            <p class="text-lg text-gray-300 mb-6">
+                Ini adalah paragraf pembuka artikel Anda. Anda bisa menjelaskan tentang musik yang akan dibagikan, inspirasi di baliknya, atau tips-tips terkait.
+            </p>
 
-        <!-- Daftar musik akan dirender di sini oleh JavaScript -->
-        <section id="musicList" class="grid gap-6 md:grid-cols-2"></section>
-
-        <!-- Bagian Footer dengan tautan media sosial yang menonjol -->
-        <footer class="pt-8 text-gray-700 text-sm text-center">
-            <p>&copy; 2024 Markas Audio Music.</p>
-            <div class="mt-4 flex justify-center space-x-6">
-                <!-- Tautan ke channel YouTube Anda -->
-                <a href="https://studio.youtube.com/channel/UCbLzJiH7JchPC8RKSRPXHEA" target="_blank" class="hover:text-orange-500 transition-colors duration-300 text-lg font-semibold">
-                    YouTube
-                </a>
-                <!-- Tautan media sosial lain -->
-                <a href="URL_INSTAGRAM_ANDA" target="_blank" class="hover:text-orange-500 transition-colors duration-300 text-lg font-semibold">
-                    Instagram
-                </a>
-                <a href="URL_TIKTOK_ANDA" target="_blank" class="hover:text-orange-500 transition-colors duration-300 text-lg font-semibold">
-                    TikTok
-                </a>
+            <!-- Video Embed (Opsional) - Sekarang responsif -->
+            <div class="video-container my-8">
+                <!-- Ganti link di bawah dengan embed code dari YouTube -->
+                <iframe class="rounded-xl" src="https://www.youtube.com/embed/VIDEO_ID_ANDA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-        </footer>
 
+            <!-- Placeholder Iklan -->
+            <div class="ad-placeholder text-gray-500">
+                Area Iklan 300x250 (Google AdSense)
+            </div>
+
+            <p class="text-gray-300 my-6">
+                Berikut adalah musik bebas hak cipta yang bisa Anda gunakan. Anda dapat memutarnya di bawah ini atau mengunduhnya langsung.
+            </p>
+
+            <!-- Pemutar Musik - Sekarang responsif -->
+            <div class="bg-gray-800 rounded-xl p-4 flex flex-col md:flex-row items-center justify-between shadow-lg space-y-4 md:space-y-0 md:space-x-4">
+                <div class="flex items-center space-x-4 w-full md:w-auto">
+                    <img src="https://placehold.co/60x60/F97316/FFF?text=Music" alt="Cover lagu" class="w-16 h-16 rounded-lg">
+                    <div>
+                        <h4 class="text-xl font-bold text-white">Judul Lagu Anda</h4>
+                        <p class="text-sm text-gray-400">Oleh Nama Musisi</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 w-full md:w-auto audio-player-container">
+                    <audio controls class="w-full">
+                        <source src="URL_FILE_MUSIK_ANDA.mp3" type="audio/mpeg">
+                        Browser Anda tidak mendukung elemen audio.
+                    </audio>
+                    <a href="URL_FILE_MUSIK_ANDA.mp3" download class="bg-orange-500 text-white p-3 rounded-lg hover:bg-orange-600 transition-colors flex-shrink-0">
+                        <!-- Icon Unduh SVG -->
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Teks Atribusi -->
+            <div class="bg-gray-800 text-gray-300 p-4 rounded-lg mt-8">
+                <h4 class="font-bold text-white mb-2">Cara Menggunakan:</h4>
+                <p class="text-sm">Silakan salin dan tempel atribusi berikut ke deskripsi video Anda:</p>
+                <pre class="mt-2 text-sm bg-gray-900 p-3 rounded-lg overflow-x-auto">Judul: Judul Lagu Anda
+Musisi: Nama Musisi
+Sumber: Markas Audio Music
+Link: [Tautan ke artikel ini]</pre>
+            </div>
+        </main>
     </div>
-
-    <!-- Script JavaScript untuk menampilkan musik dan fungsionalitas pemutar -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Data musik statis untuk contoh.
-            // Dalam aplikasi sungguhan, data ini akan diambil dari server atau database.
-            const musicData = [
-                {
-                    id: '1',
-                    title: 'Gaming Beat',
-                    artist: 'Markas Audio',
-                    genre: 'Gaming EDM',
-                    file: 'https://cdn.pixabay.com/download/audio/2023/06/15/audio_24751f8a84.mp3?filename=lofi-study-112191.mp3'
-                },
-                {
-                    id: '2',
-                    title: 'The Hero\'s Journey',
-                    artist: 'Markas Audio',
-                    genre: 'Cinematic',
-                    file: 'https://cdn.pixabay.com/download/audio/2023/12/28/audio_255fa3e8fe.mp3?filename=cinematic-ambient-dream-175655.mp3'
-                },
-                {
-                    id: '3',
-                    title: 'Chillhop Vibes',
-                    artist: 'Markas Audio',
-                    genre: 'Lofi Hip Hop',
-                    file: 'https://cdn.pixabay.com/download/audio/2023/12/28/audio_820c788647.mp3?filename=smooth-relaxing-hip-hop-175510.mp3'
-                },
-                {
-                    id: '4',
-                    title: 'Rockin\' the Game',
-                    artist: 'Markas Audio',
-                    genre: 'Rock',
-                    file: 'https://cdn.pixabay.com/download/audio/2024/02/16/audio_03d97f1f0a.mp3?filename=upbeat-funk-rock-181146.mp3'
-                },
-            ];
-
-            const musicList = document.getElementById('musicList');
-            let currentAudio = null;
-            let currentButton = null;
-
-            // Fungsi untuk membuat elemen HTML untuk setiap lagu
-            function createMusicCard(music) {
-                const card = document.createElement('div');
-                card.classList.add('bg-white/50', 'rounded-xl', 'p-6', 'shadow-lg', 'space-y-4', 'border', 'border-white/50', 'text-left');
-
-                // Judul dan Musisi
-                const title = document.createElement('h3');
-                title.classList.add('text-xl', 'font-bold', 'text-gray-800');
-                title.textContent = music.title;
-
-                const artist = document.createElement('p');
-                artist.classList.add('text-gray-600', 'text-sm');
-                artist.textContent = `oleh ${music.artist}`;
-
-                // Genre
-                const genre = document.createElement('span');
-                genre.classList.add('inline-block', 'bg-gray-200', 'text-gray-700', 'text-xs', 'font-semibold', 'px-3', 'py-1', 'rounded-full', 'mt-2');
-                genre.textContent = music.genre;
-
-                // Kontainer untuk tombol
-                const buttonContainer = document.createElement('div');
-                buttonContainer.classList.add('flex', 'space-x-4', 'mt-4');
-
-                // Tombol Putar/Jeda
-                const playButton = document.createElement('button');
-                playButton.classList.add('flex-1', 'py-2', 'px-4', 'rounded-full', 'bg-blue-700', 'text-white', 'font-semibold', 'transition-colors', 'hover:bg-blue-800');
-                playButton.innerHTML = 'Putar';
-                playButton.onclick = () => togglePlayPause(playButton, music.file);
-
-                // Tombol Unduh
-                const downloadButton = document.createElement('a');
-                downloadButton.classList.add('flex-1', 'py-2', 'px-4', 'rounded-full', 'bg-orange-500', 'text-white', 'font-semibold', 'text-center', 'transition-colors', 'hover:bg-orange-600');
-                downloadButton.href = music.file;
-                downloadButton.download = `${music.title}.mp3`;
-                downloadButton.textContent = 'Unduh';
-
-                buttonContainer.appendChild(playButton);
-                buttonContainer.appendChild(downloadButton);
-
-                card.appendChild(title);
-                card.appendChild(artist);
-                card.appendChild(genre);
-                card.appendChild(buttonContainer);
-
-                return card;
-            }
-
-            // Fungsi untuk memutar atau menjeda audio
-            function togglePlayPause(button, file) {
-                if (currentAudio && currentAudio.src === file) {
-                    if (currentAudio.paused) {
-                        currentAudio.play();
-                        button.textContent = 'Jeda';
-                    } else {
-                        currentAudio.pause();
-                        button.textContent = 'Putar';
-                    }
-                } else {
-                    if (currentAudio) {
-                        currentAudio.pause();
-                        if (currentButton) {
-                            currentButton.textContent = 'Putar';
-                        }
-                    }
-                    currentAudio = new Audio(file);
-                    currentAudio.play();
-                    button.textContent = 'Jeda';
-                    currentButton = button;
-                    
-                    // Reset tombol saat lagu selesai
-                    currentAudio.onended = () => {
-                        button.textContent = 'Putar';
-                        currentAudio = null;
-                        currentButton = null;
-                    };
-                }
-            }
-
-            // Render semua musik ke halaman
-            musicData.forEach(music => {
-                musicList.appendChild(createMusicCard(music));
-            });
-        });
-    </script>
+    
+    <!-- Footer -->
+    <footer class="pt-10 pb-6 text-gray-200 text-sm text-center bg-gray-900 bg-opacity-50">
+        <p>&copy; 2024 Markas Audio Music.</p>
+        <div class="mt-4 flex justify-center space-x-6">
+            <!-- Tautan ke channel YouTube Anda dengan ikon SVG -->
+            <a href="https://studio.youtube.com/channel/UCbLzJiH7JchPC8RKSRPXHEA" target="_blank" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-white/10 transition-colors duration-300 group">
+                <svg class="h-6 w-6 text-red-500 group-hover:text-red-400 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19.615 3.184c-3.66-1.579-7.323-1.58-10.983 0A2.88 2.88 0 0 0 5 6.375c-1.579 3.66-.525 9.042 0 10.983A2.88 2.88 0 0 0 6.375 19c3.66 1.579 7.323 1.58 10.983 0A2.88 2.88 0 0 0 19 17.625c1.579-3.66.525-9.042 0-10.983A2.88 2.88 0 0 0 19.615 3.184Z" fill="#ff0000"/><path d="M10 15.654v-7.308L16 12l-6 3.654Z" fill="#ffffff"/>
+                </svg>
+                <span class="text-white text-lg font-semibold group-hover:text-red-400 transition-colors duration-300">YouTube</span>
+            </a>
+            <!-- Tautan media sosial lain dengan ikon SVG -->
+            <a href="URL_INSTAGRAM_ANDA" target="_blank" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-white/10 transition-colors duration-300 group">
+                <svg class="h-6 w-6 text-pink-500 group-hover:text-pink-400 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C8.214 2 7.747 2.016 6.276 2.083 4.805 2.15 3.79 2.505 2.76 3.535S2.15 4.805 2.083 6.276c-.067 1.47-.083 1.944-.083 5.724s.016 4.254.083 5.724c.067 1.47.422 2.485 1.452 3.515 1.03 1.03 2.045 1.385 3.515 1.452 1.47.067 1.944.083 5.724.083s4.254-.016 5.724-.083c1.47-.067 2.485-.422 3.515-1.452s1.385-2.045 1.452-3.515c.067-1.47.083-1.944.083-5.724s-.016-4.254-.083-5.724c-.067-1.47-.422-2.485-1.452-3.515S18.195 2.15 16.724 2.083C15.253 2.016 14.786 2 11 2zm-1 18h2c2.096 0 2.378-.016 3.232-.054.836-.037 1.36-.263 1.81-.462.593-.263.993-.654 1.256-.918.263-.263.654-.663.918-1.256.199-.45.425-.974.462-1.81.038-.854.054-1.136.054-3.232s-.016-2.378-.054-3.232c-.037-.836-.263-1.36-.462-1.81-.263-.593-.654-.993-.918-1.256s-.663-.654-1.256-.918c-.45-.199-.974-.425-1.81-.462-.854-.038-1.136-.054-3.232-.054s-2.378.016-3.232.054c.836.037-1.36.263-1.81.462-.593.263-.993.654-1.256.918-.263.263-.654.663-.918 1.256-.199.45-.425.974-.462 1.81-.038.854-.054 1.136-.054 3.232s.016 2.378.054 3.232c.037.836.263 1.36.462 1.81.263.593.654.993.918 1.256.263.263.663.654 1.256.918.45.199.974.425 1.81.462.854.038 1.136.054 3.232.054zm-.001-1.498h.002s.013 0 .026-.001c.854-.038 1.09-.053 3.094-.053s2.24.015 3.094.053c.69.03 1.13.208 1.543.376.43.176.726.37 1.025.669.299.299.493.595.669 1.025.168.413.346.853.376 1.543.038.854.053 1.09.053 3.094s-.015 2.24-.053 3.094c-.03.69-.208 1.13-.376 1.543-.176.43-.37.726-.669 1.025-.299.299-.595.493-1.025.669-.413.168-.853-.346-1.543-.376-.854-.038-1.09-.053-3.094-.053s-2.24-.015-3.094-.053c-.69-.03-1.13-.208-1.543-.376-.43-.176-.726-.37-1.025-.669-.299-.299-.493-.595-.669-1.025-.168-.413-.346-.853-.376-1.543-.038-.854-.053-1.09-.053-3.094s.015-2.24.053-3.094c.03-.69.208-1.13.376-1.543.176-.43.37-.726.669-1.025.299-.299.595-.493 1.025-.669.413-.168.853-.346 1.543-.376.854-.038 1.09-.053 3.094-.053zM12 18.5a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13zm0-11a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm5-3.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
+                </svg>
+                <span class="text-white text-lg font-semibold group-hover:text-pink-400 transition-colors duration-300">Instagram</span>
+            </a>
+            <a href="URL_TIKTOK_ANDA" target="_blank" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-white/10 transition-colors duration-300 group">
+                <svg class="h-6 w-6 text-white group-hover:text-gray-200 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm1 14v-4c0-1.104-.896-2-2-2H8v2h3v4h-3v2h6v-2h-3zm-1-6h2c1.104 0 2-.896 2-2V8h-2v2h-2c-1.104 0-2 .896-2 2zM17 8h-2v2h-2v-2h-2V8h6V6h2v6h-2V8z"/>
+                </svg>
+                <span class="text-white text-lg font-semibold group-hover:text-gray-200 transition-colors duration-300">TikTok</span>
+            </a>
+        </div>
+    </footer>
 </body>
 </html>
