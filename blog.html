@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koleksi Musik - Markas Audio Music</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Menggunakan font Poppins yang modern dan mudah dibaca */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Latar belakang gradien cerah dengan nuansa oranye-hijau */
+        .bg-gradient-vibrant {
+            background: linear-gradient(45deg, #F97316, #16A34A, #FDE047);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+        /* Animasi gradien untuk efek yang lebih hidup */
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Efek frosted glass untuk kontainer utama */
+        .frosted-glass {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gradient-vibrant text-gray-900 min-h-screen p-4">
+
+    <!-- Kontainer Utama dengan desain yang seragam -->
+    <div class="frosted-glass rounded-3xl shadow-2xl p-8 md:p-12 max-w-4xl mx-auto my-8 space-y-8 border border-white/50 animate-fade-in">
+
+        <!-- Header Halaman Blog -->
+        <header class="text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 leading-tight drop-shadow-lg">
+                Koleksi Musik Kami
+            </h1>
+            <p class="text-base md:text-lg text-gray-700 mt-2">
+                Temukan dan gunakan musik bebas hak cipta untuk kontenmu.
+            </p>
+        </header>
+
+        <!-- Link ke halaman unggah -->
+        <a href="upload.html" class="inline-block px-6 py-3 bg-blue-700 text-white font-semibold rounded-full shadow-lg hover:bg-blue-800 transition-colors duration-300">
+            + Tambah Musik Baru
+        </a>
+
+        <!-- Daftar musik akan dirender di sini oleh JavaScript -->
+        <section id="musicList" class="grid gap-6 md:grid-cols-2"></section>
+
+        <!-- Bagian Footer dengan tautan media sosial yang menonjol -->
+        <footer class="pt-8 text-gray-700 text-sm text-center">
+            <p>&copy; 2024 Markas Audio Music.</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <!-- Tautan ke channel YouTube Anda -->
+                <a href="https://studio.youtube.com/channel/UCbLzJiH7JchPC8RKSRPXHEA" target="_blank" class="hover:text-orange-500 transition-colors duration-300 text-lg font-semibold">
+                    YouTube
+                </a>
+                <!-- Tautan media sosial lain -->
+                <a href="URL_INSTAGRAM_ANDA" target="_blank" class="hover:text-orange-500 transition-colors duration-300 text-lg font-semibold">
+                    Instagram
+                </a>
+                <a href="URL_TIKTOK_ANDA" target="_blank" class="hover:text-orange-500 transition-colors duration-300 text-lg font-semibold">
+                    TikTok
+                </a>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Script JavaScript untuk menampilkan musik dan fungsionalitas pemutar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Data musik statis untuk contoh.
+            // Dalam aplikasi sungguhan, data ini akan diambil dari server atau database.
+            const musicData = [
+                {
+                    id: '1',
+                    title: 'Gaming Beat',
+                    artist: 'Markas Audio',
+                    genre: 'Gaming EDM',
+                    file: 'https://cdn.pixabay.com/download/audio/2023/06/15/audio_24751f8a84.mp3?filename=lofi-study-112191.mp3'
+                },
+                {
+                    id: '2',
+                    title: 'The Hero\'s Journey',
+                    artist: 'Markas Audio',
+                    genre: 'Cinematic',
+                    file: 'https://cdn.pixabay.com/download/audio/2023/12/28/audio_255fa3e8fe.mp3?filename=cinematic-ambient-dream-175655.mp3'
+                },
+                {
+                    id: '3',
+                    title: 'Chillhop Vibes',
+                    artist: 'Markas Audio',
+                    genre: 'Lofi Hip Hop',
+                    file: 'https://cdn.pixabay.com/download/audio/2023/12/28/audio_820c788647.mp3?filename=smooth-relaxing-hip-hop-175510.mp3'
+                },
+                {
+                    id: '4',
+                    title: 'Rockin\' the Game',
+                    artist: 'Markas Audio',
+                    genre: 'Rock',
+                    file: 'https://cdn.pixabay.com/download/audio/2024/02/16/audio_03d97f1f0a.mp3?filename=upbeat-funk-rock-181146.mp3'
+                },
+            ];
+
+            const musicList = document.getElementById('musicList');
+            let currentAudio = null;
+            let currentButton = null;
+
+            // Fungsi untuk membuat elemen HTML untuk setiap lagu
+            function createMusicCard(music) {
+                const card = document.createElement('div');
+                card.classList.add('bg-white/50', 'rounded-xl', 'p-6', 'shadow-lg', 'space-y-4', 'border', 'border-white/50', 'text-left');
+
+                // Judul dan Musisi
+                const title = document.createElement('h3');
+                title.classList.add('text-xl', 'font-bold', 'text-gray-800');
+                title.textContent = music.title;
+
+                const artist = document.createElement('p');
+                artist.classList.add('text-gray-600', 'text-sm');
+                artist.textContent = `oleh ${music.artist}`;
+
+                // Genre
+                const genre = document.createElement('span');
+                genre.classList.add('inline-block', 'bg-gray-200', 'text-gray-700', 'text-xs', 'font-semibold', 'px-3', 'py-1', 'rounded-full', 'mt-2');
+                genre.textContent = music.genre;
+
+                // Kontainer untuk tombol
+                const buttonContainer = document.createElement('div');
+                buttonContainer.classList.add('flex', 'space-x-4', 'mt-4');
+
+                // Tombol Putar/Jeda
+                const playButton = document.createElement('button');
+                playButton.classList.add('flex-1', 'py-2', 'px-4', 'rounded-full', 'bg-blue-700', 'text-white', 'font-semibold', 'transition-colors', 'hover:bg-blue-800');
+                playButton.innerHTML = 'Putar';
+                playButton.onclick = () => togglePlayPause(playButton, music.file);
+
+                // Tombol Unduh
+                const downloadButton = document.createElement('a');
+                downloadButton.classList.add('flex-1', 'py-2', 'px-4', 'rounded-full', 'bg-orange-500', 'text-white', 'font-semibold', 'text-center', 'transition-colors', 'hover:bg-orange-600');
+                downloadButton.href = music.file;
+                downloadButton.download = `${music.title}.mp3`;
+                downloadButton.textContent = 'Unduh';
+
+                buttonContainer.appendChild(playButton);
+                buttonContainer.appendChild(downloadButton);
+
+                card.appendChild(title);
+                card.appendChild(artist);
+                card.appendChild(genre);
+                card.appendChild(buttonContainer);
+
+                return card;
+            }
+
+            // Fungsi untuk memutar atau menjeda audio
+            function togglePlayPause(button, file) {
+                if (currentAudio && currentAudio.src === file) {
+                    if (currentAudio.paused) {
+                        currentAudio.play();
+                        button.textContent = 'Jeda';
+                    } else {
+                        currentAudio.pause();
+                        button.textContent = 'Putar';
+                    }
+                } else {
+                    if (currentAudio) {
+                        currentAudio.pause();
+                        if (currentButton) {
+                            currentButton.textContent = 'Putar';
+                        }
+                    }
+                    currentAudio = new Audio(file);
+                    currentAudio.play();
+                    button.textContent = 'Jeda';
+                    currentButton = button;
+                    
+                    // Reset tombol saat lagu selesai
+                    currentAudio.onended = () => {
+                        button.textContent = 'Putar';
+                        currentAudio = null;
+                        currentButton = null;
+                    };
+                }
+            }
+
+            // Render semua musik ke halaman
+            musicData.forEach(music => {
+                musicList.appendChild(createMusicCard(music));
+            });
+        });
+    </script>
+</body>
+</html>

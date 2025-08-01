@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unggah Musik - Markas Audio Music</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Menggunakan font Poppins yang modern dan mudah dibaca */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Latar belakang gradien cerah dengan nuansa oranye-hijau */
+        .bg-gradient-vibrant {
+            background: linear-gradient(45deg, #F97316, #16A34A, #FDE047);
+            background-size: 400% 400%;
+            animation: gradient-animation 15s ease infinite;
+        }
+
+        /* Animasi gradien untuk efek yang lebih hidup */
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Efek frosted glass untuk kontainer utama */
+        .frosted-glass {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gradient-vibrant text-gray-900 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- Kontainer Unggah Musik dengan desain yang seragam -->
+    <div class="frosted-glass rounded-3xl shadow-2xl p-8 md:p-12 max-w-2xl w-full text-center space-y-8 border border-white/50 transform hover:scale-105 transition-transform duration-500 ease-in-out">
+
+        <!-- Header Halaman Unggah -->
+        <header>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 leading-tight drop-shadow-lg text-shadow-md">
+                Unggah Musik Baru
+            </h2>
+            <p class="text-base md:text-lg text-gray-700 mt-2">
+                Tambahkan lagu baru ke koleksi bebas hak cipta Anda.
+            </p>
+        </header>
+
+        <!-- Formulir Unggah -->
+        <form id="uploadForm" class="space-y-6 text-left">
+            <div>
+                <label for="songTitle" class="block text-gray-700 font-semibold mb-2">Judul Lagu</label>
+                <input type="text" id="songTitle" name="songTitle" required class="w-full p-3 rounded-lg bg-white/50 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors">
+            </div>
+            <div>
+                <label for="artistName" class="block text-gray-700 font-semibold mb-2">Nama Musisi</label>
+                <input type="text" id="artistName" name="artistName" required class="w-full p-3 rounded-lg bg-white/50 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors">
+            </div>
+            <div>
+                <label for="genre" class="block text-gray-700 font-semibold mb-2">Genre</label>
+                <select id="genre" name="genre" required class="w-full p-3 rounded-lg bg-white/50 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-colors">
+                    <option value="" disabled selected>Pilih Genre</option>
+                    <option value="Gaming EDM">Gaming EDM</option>
+                    <option value="Lofi Hip Hop">Lofi Hip Hop</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Ambient">Ambient</option>
+                    <option value="Cinematic">Cinematic</option>
+                </select>
+            </div>
+            <div>
+                <label for="audioFile" class="block text-gray-700 font-semibold mb-2">File Audio (.mp3, .wav)</label>
+                <input type="file" id="audioFile" name="audioFile" accept=".mp3,.wav" required class="w-full text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 cursor-pointer transition-colors">
+            </div>
+            
+            <button type="submit" class="w-full px-10 py-4 bg-blue-700 text-white font-extrabold text-xl rounded-full shadow-lg shadow-blue-500/50 hover:bg-blue-800 transition-all duration-300 transform hover:scale-105 hover:shadow-blue-400/70">
+                Unggah
+            </button>
+        </form>
+
+        <!-- Bagian Hasil Unggah -->
+        <div id="resultBox" class="hidden text-center space-y-4 pt-6 animate-fade-in">
+            <h3 class="text-2xl font-bold text-gray-800">Unggahan Berhasil!</h3>
+            <p class="text-gray-700">Gunakan atribusi di bawah ini di deskripsi video Anda:</p>
+            <div class="bg-gray-200 p-4 rounded-lg border border-gray-400 break-words relative">
+                <code id="attributionText" class="text-sm md:text-base text-gray-800"></code>
+                <button onclick="copyToClipboard()" class="absolute top-2 right-2 p-2 bg-gray-300 rounded-lg text-gray-600 hover:bg-gray-400 transition-colors">
+                    <!-- Icon SVG untuk menyalin -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M8 2a2 2 0 00-2 2v2H5a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V8a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8zM6 4a.5.5 0 01.5-.5h5a.5.5 0 01.5.5v1.5h-6V4zM5 8h10a.5.5 0 01.5.5v10a.5.5 0 01-.5.5H5a.5.5 0 01-.5-.5V8.5a.5.5 0 01.5-.5z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script JavaScript untuk simulasi unggah dan salin teks -->
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            // Mencegah halaman refresh
+            event.preventDefault();
+
+            // Mendapatkan data dari formulir
+            const songTitle = document.getElementById('songTitle').value;
+            const artistName = document.getElementById('artistName').value;
+            
+            // Membuat teks atribusi
+            const attribution = `Judul: ${songTitle}\nMusisi: ${artistName}\nSumber: Markas Audio Music\nLink: [Link ke lagu Anda di blog]`;
+            
+            // Menampilkan hasil
+            document.getElementById('attributionText').textContent = attribution;
+            document.getElementById('resultBox').classList.remove('hidden');
+
+            // Menggulir ke bagian hasil
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Fungsi untuk menyalin teks ke clipboard
+        function copyToClipboard() {
+            const attributionText = document.getElementById('attributionText');
+            const range = document.createRange();
+            range.selectNode(attributionText);
+            window.getSelection().removeAllRanges(); // Hapus seleksi sebelumnya
+            window.getSelection().addRange(range); // Pilih teks
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges(); // Hapus seleksi
+            alert('Teks atribusi berhasil disalin!');
+        }
+
+        // Konfigurasi animasi kustom Tailwind CSS
+        tailwind.config = {
+          theme: {
+            extend: {
+              keyframes: {
+                'fade-in': {
+                  '0%': { opacity: '0', transform: 'translateY(20px)' },
+                  '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+              },
+              animation: {
+                'fade-in': 'fade-in 1s ease-out',
+              }
+            }
+          }
+        }
+    </script>
+
+</body>
+</html>
